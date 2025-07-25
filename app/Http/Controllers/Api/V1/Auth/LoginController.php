@@ -8,6 +8,7 @@ use App\Http\Requests\V1\Auth\LoginRequest;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Subgroup;
+use Knuckles\Scribe\Attributes\Unauthenticated;
 
 #[Group('Autenticación')]
 #[Subgroup('Sesión de Usuario')]
@@ -17,6 +18,7 @@ class LoginController extends Controller
         title: 'Iniciar sesión',
         description: 'Autentica al usuario con email y contraseña, devolviendo un token de acceso válido para realizar peticiones autenticadas.'
     )]
+    #[Unauthenticated]
     public function __invoke(LoginRequest $request, LoginUserAction $action)
     {
         $result = $action($request->validated());

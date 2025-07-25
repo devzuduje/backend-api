@@ -8,6 +8,7 @@ use App\Http\Requests\V1\Auth\RegisterRequest;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Subgroup;
+use Knuckles\Scribe\Attributes\Unauthenticated;
 
 #[Group('Autenticación')]
 #[Subgroup('Gestión de Usuarios')]
@@ -17,6 +18,7 @@ class RegisterController extends Controller
         title: 'Registrar nuevo usuario',
         description: 'Crea una nueva cuenta de usuario en el sistema y devuelve un token de acceso para autenticación inmediata.'
     )]
+    #[Unauthenticated]
     public function __invoke(RegisterRequest $request, RegisterUserAction $action)
     {
         $result = $action($request->validated());

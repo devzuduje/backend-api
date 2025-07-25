@@ -1,4 +1,4 @@
-name: Endpoints
+name: Usuario
 description: ''
 endpoints:
   -
@@ -6,15 +6,16 @@ endpoints:
       - GET
     uri: api/v1/user
     metadata:
-      groupName: Endpoints
+      groupName: Usuario
       groupDescription: ''
-      subgroup: ''
+      subgroup: 'Información del Usuario'
       subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
+      title: 'Obtener información del usuario'
+      description: 'Devuelve la información completa del usuario autenticado actualmente.'
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -35,7 +36,10 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null

@@ -92,14 +92,19 @@
                                                                     </ul>
                                                                         </ul>
                             </ul>
-                    <ul id="tocify-header-endpoints" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="endpoints">
-                    <a href="#endpoints">Endpoints</a>
+                    <ul id="tocify-header-usuario" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="usuario">
+                    <a href="#usuario">Usuario</a>
                 </li>
-                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-user">
-                                <a href="#endpoints-GETapi-v1-user">GET api/v1/user</a>
+                                    <ul id="tocify-subheader-usuario" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="usuario-informacion-del-usuario">
+                                <a href="#usuario-informacion-del-usuario">Información del Usuario</a>
                             </li>
+                                                            <ul id="tocify-subheader-usuario-informacion-del-usuario" class="tocify-subheader">
+                                                                            <li class="tocify-item level-3" data-unique="usuario-GETapi-v1-user">
+                                            <a href="#usuario-GETapi-v1-user">Obtener información del usuario</a>
+                                        </li>
+                                                                    </ul>
                                                                         </ul>
                             </ul>
             </div>
@@ -128,7 +133,9 @@
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).&lt;/aside&gt;</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>This API is not authenticated.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_TOKEN}"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
+<p>Puedes obtener tu token de acceso registrándote o iniciando sesión. El token debe enviarse en el header Authorization con el prefijo Bearer.</p>
 
         <h1 id="autenticacion">Autenticación</h1>
 
@@ -461,6 +468,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost/api/v1/auth/logout" \
+    --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -471,6 +479,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -532,6 +541,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-auth-logout"
+               value="Bearer {YOUR_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -555,16 +575,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                <h1 id="endpoints">Endpoints</h1>
+                <h1 id="usuario">Usuario</h1>
 
     
 
-                                <h2 id="endpoints-GETapi-v1-user">GET api/v1/user</h2>
+                        <h2 id="usuario-informacion-del-usuario">Información del Usuario</h2>
+                                                    <h2 id="usuario-GETapi-v1-user">Obtener información del usuario</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>Devuelve la información completa del usuario autenticado actualmente.</p>
 
 <span id="example-requests-GETapi-v1-user">
 <blockquote>Example request:</blockquote>
@@ -573,6 +595,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost/api/v1/user" \
+    --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -583,6 +606,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -629,7 +653,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-v1-user" data-method="GET"
       data-path="api/v1/user"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -659,6 +683,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/user</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-user"
+               value="Bearer {YOUR_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_TOKEN}</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;

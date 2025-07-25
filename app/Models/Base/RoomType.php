@@ -3,9 +3,12 @@
 namespace App\Models\Base;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RoomType extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'name',
         'code',
@@ -13,6 +16,8 @@ class RoomType extends Model
 
     protected function casts(): array
     {
-        return [];
+        return [
+            'deleted_at' => 'datetime',
+        ];
     }
 }
