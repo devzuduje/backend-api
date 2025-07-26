@@ -24,14 +24,12 @@ final readonly class GetHotelStatsAction
 
         return [
             'total_hotels' => $totalHotels,
-            'top_hotels_by_rooms' => $topHotels->map(function (\App\Models\Hotel $hotel) {
-                return [
-                    'id' => $hotel->id,
-                    'name' => $hotel->name,
-                    'city' => $hotel->city,
-                    'max_rooms' => $hotel->max_rooms,
-                ];
-            }),
+            'top_hotels_by_rooms' => $topHotels->map(fn (\App\Models\Hotel $hotel) => [
+                'id' => $hotel->id,
+                'name' => $hotel->name,
+                'city' => $hotel->city,
+                'max_rooms' => $hotel->max_rooms,
+            ]),
             'hotels_by_city' => $citiesCount->map(fn ($count, $city) => [
                 'city' => $city,
                 'hotels_count' => $count,

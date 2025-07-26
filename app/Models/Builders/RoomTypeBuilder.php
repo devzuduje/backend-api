@@ -15,4 +15,15 @@ final class RoomTypeBuilder extends Builder
     {
         return $this->where(column: 'name', operator: '=', value: $name);
     }
+
+    public function withTrashed(): self
+    {
+        return $this->withoutGlobalScope(\Illuminate\Database\Eloquent\SoftDeletingScope::class);
+    }
+
+    public function onlyTrashed(): self
+    {
+        return $this->withoutGlobalScope(\Illuminate\Database\Eloquent\SoftDeletingScope::class)
+                   ->whereNotNull('deleted_at');
+    }
 }
