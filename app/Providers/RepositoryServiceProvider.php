@@ -19,6 +19,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\RoomType\RoomTypeRepositoryInterface::class,
             \App\Repositories\RoomType\RoomTypeRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Accommodation\AccommodationRepositoryInterface::class,
+            \App\Repositories\Accommodation\AccommodationRepository::class
+        );
     }
 
     public function boot(): void

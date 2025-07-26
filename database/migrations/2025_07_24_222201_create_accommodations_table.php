@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->integer('capacity');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

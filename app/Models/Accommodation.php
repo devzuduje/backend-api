@@ -15,16 +15,16 @@ class Accommodation extends Base\Accommodation
     public function name(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => ucfirst($value),
-            set: fn (string $value) => strtolower($value),
+            get: fn ($value) => ucfirst((string) $value),
+            set: fn ($value) => strtolower(trim((string) $value))
         );
     }
 
     public function code(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => strtoupper($value),
-            set: fn (string $value) => strtoupper($value),
+            get: fn ($value) => strtoupper((string) $value),
+            set: fn ($value) => strtoupper(trim((string) $value))
         );
     }
 

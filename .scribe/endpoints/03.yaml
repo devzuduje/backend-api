@@ -177,14 +177,14 @@ endpoints:
         name: id
         description: 'The ID of the room type.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 16
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -232,14 +232,14 @@ endpoints:
         name: id
         description: 'The ID of the room type.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 16
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -299,14 +299,14 @@ endpoints:
         name: id
         description: 'The ID of the room type.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 16
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -344,14 +344,14 @@ endpoints:
         name: roomTypeId
         description: ''
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      roomTypeId: 16
+      roomTypeId: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
