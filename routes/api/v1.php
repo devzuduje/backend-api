@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('accommodations', App\Http\Controllers\Api\V1\AccommodationController::class);
     Route::post('accommodations/{accommodationId}/restore', [App\Http\Controllers\Api\V1\AccommodationController::class, 'restore']);
 
-    // TODO: Add remaining resource controllers when created:
-    // Route::apiResource('hotel-rooms', App\Http\Controllers\Api\V1\HotelRoomController::class);
+    // Hotel Room management routes
+    Route::apiResource('hotel-rooms', App\Http\Controllers\Api\V1\HotelRoomController::class);
+    Route::post('hotel-rooms/{hotelRoomId}/restore', [App\Http\Controllers\Api\V1\HotelRoomController::class, 'restore']);
 });

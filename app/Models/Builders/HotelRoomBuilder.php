@@ -26,9 +26,14 @@ final class HotelRoomBuilder extends Builder
         return $this->where(column: 'quantity', operator: '>=', value: $minQuantity);
     }
 
-    public function byHotelAndType(int $hotelId, int $roomTypeId): self
+    public function withTrashed(): self
     {
-        return $this->where(column: 'hotel_id', operator: '=', value: $hotelId)
-            ->where(column: 'room_type_id', operator: '=', value: $roomTypeId);
+        return $this->withoutGlobalScope(\Illuminate\Database\Eloquent\SoftDeletingScope::class);
+    }
+
+    public function onlyTrashed(): self
+    {
+        return $this->withoutGlobalScope(\Illuminate\Database\Eloquent\SoftDeletingScope::class)
+            ->whereNotNull('deleted_at');
     }
 }

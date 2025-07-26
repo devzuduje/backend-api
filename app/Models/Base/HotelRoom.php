@@ -3,9 +3,12 @@
 namespace App\Models\Base;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HotelRoom extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'hotel_id',
         'room_type_id',
@@ -20,6 +23,7 @@ class HotelRoom extends Model
             'room_type_id' => 'integer',
             'accommodation_id' => 'integer',
             'quantity' => 'integer',
+            'deleted_at' => 'datetime',
         ];
     }
 }

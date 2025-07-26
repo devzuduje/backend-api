@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('accommodation_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['hotel_id', 'room_type_id', 'accommodation_id'], 'hotel_room_type_accommodation_unique');
         });

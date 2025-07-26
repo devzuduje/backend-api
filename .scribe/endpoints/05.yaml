@@ -1,0 +1,423 @@
+name: 'Gestión de Habitaciones de Hotel'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/hotel-rooms
+    metadata:
+      groupName: 'Gestión de Habitaciones de Hotel'
+      groupDescription: ''
+      subgroup: 'CRUD de Habitaciones'
+      subgroupDescription: ''
+      title: 'Listar habitaciones de hotel'
+      description: 'Obtiene una lista paginada de habitaciones de hotel con opciones de filtrado por hotel, tipo de habitación, acomodación o cantidad mínima, incluyendo soporte para borrado lógico.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      hotel_id:
+        name: hotel_id
+        description: 'Filtrar por ID del hotel. The <code>id</code> of an existing record in the hotels table.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      room_type_id:
+        name: room_type_id
+        description: 'Filtrar por ID del tipo de habitación. The <code>id</code> of an existing record in the room_types table.'
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      accommodation_id:
+        name: accommodation_id
+        description: 'Filtrar por ID de la acomodación. The <code>id</code> of an existing record in the accommodations table.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      min_quantity:
+        name: min_quantity
+        description: 'Filtrar por cantidad mínima de habitaciones. Must be at least 1.'
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      page:
+        name: page
+        description: 'Número de página para paginación. Must be at least 1.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      per_page:
+        name: per_page
+        description: 'Elementos por página (máximo 100). Must be at least 1. Must not be greater than 100.'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      with_trashed:
+        name: with_trashed
+        description: 'Incluir habitaciones eliminadas (borrado lógico).'
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      only_trashed:
+        name: only_trashed
+        description: 'Mostrar solo habitaciones eliminadas.'
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      hotel_id: 1
+      room_type_id: 2
+      accommodation_id: 1
+      min_quantity: 5
+      page: 1
+      per_page: 15
+      with_trashed: false
+      only_trashed: false
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/hotel-rooms
+    metadata:
+      groupName: 'Gestión de Habitaciones de Hotel'
+      groupDescription: ''
+      subgroup: 'CRUD de Habitaciones'
+      subgroupDescription: ''
+      title: 'Crear habitación de hotel'
+      description: 'Crea una nueva habitación de hotel en el sistema con la combinación única de hotel, tipo de habitación y acomodación.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      hotel_id:
+        name: hotel_id
+        description: 'ID del hotel. The <code>id</code> of an existing record in the hotels table.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      room_type_id:
+        name: room_type_id
+        description: 'ID del tipo de habitación. The <code>id</code> of an existing record in the room_types table.'
+        required: true
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      accommodation_id:
+        name: accommodation_id
+        description: 'ID de la acomodación. The <code>id</code> of an existing record in the accommodations table.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      quantity:
+        name: quantity
+        description: 'Cantidad de habitaciones disponibles. Must be at least 1. Must not be greater than 1000.'
+        required: true
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      unique_combination:
+        name: unique_combination
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      hotel_id: 1
+      room_type_id: 2
+      accommodation_id: 1
+      quantity: 10
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/hotel-rooms/{id}'
+    metadata:
+      groupName: 'Gestión de Habitaciones de Hotel'
+      groupDescription: ''
+      subgroup: 'CRUD de Habitaciones'
+      subgroupDescription: ''
+      title: 'Mostrar habitación de hotel'
+      description: 'Obtiene la información detallada de una habitación de hotel específica por su ID, incluyendo las relaciones con hotel, tipo de habitación y acomodación.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the hotel room.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/hotel-rooms/{id}'
+    metadata:
+      groupName: 'Gestión de Habitaciones de Hotel'
+      groupDescription: ''
+      subgroup: 'CRUD de Habitaciones'
+      subgroupDescription: ''
+      title: 'Actualizar habitación de hotel'
+      description: 'Actualiza la información de una habitación de hotel existente. Solo se puede actualizar la cantidad de habitaciones.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the hotel room.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      quantity:
+        name: quantity
+        description: 'Cantidad de habitaciones disponibles (opcional). Must be at least 1. Must not be greater than 1000.'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      quantity: 15
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/hotel-rooms/{id}'
+    metadata:
+      groupName: 'Gestión de Habitaciones de Hotel'
+      groupDescription: ''
+      subgroup: 'CRUD de Habitaciones'
+      subgroupDescription: ''
+      title: 'Eliminar habitación de hotel'
+      description: 'Elimina una habitación de hotel del sistema usando borrado lógico. La habitación puede ser restaurada posteriormente.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the hotel room.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/hotel-rooms/{hotelRoomId}/restore'
+    metadata:
+      groupName: 'Gestión de Habitaciones de Hotel'
+      groupDescription: ''
+      subgroup: 'CRUD de Habitaciones'
+      subgroupDescription: ''
+      title: 'Restaurar habitación de hotel'
+      description: 'Restaura una habitación de hotel previamente eliminada (borrado lógico).'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      hotelRoomId:
+        name: hotelRoomId
+        description: ''
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      hotelRoomId: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
