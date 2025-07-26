@@ -3,20 +3,20 @@
 use Illuminate\Support\Facades\Route;
 
 // Public authentication routes
-Route::prefix('auth')->group(function () {
-    Route::post('/register', App\Http\Controllers\Api\V1\Auth\RegisterController::class);
-    Route::post('/login', App\Http\Controllers\Api\V1\Auth\LoginController::class);
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('/register', App\Http\Controllers\Api\V1\Auth\RegisterController::class)->name('register');
+    Route::post('/login', App\Http\Controllers\Api\V1\Auth\LoginController::class)->name('login');
 });
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     // Auth protected routes
-    Route::prefix('auth')->group(function () {
-        Route::post('/logout', App\Http\Controllers\Api\V1\Auth\LogoutController::class);
+    Route::prefix('auth')->name('auth.')->group(function () {
+        Route::post('/logout', App\Http\Controllers\Api\V1\Auth\LogoutController::class)->name('logout');
     });
 
     // User routes
-    Route::get('/user', App\Http\Controllers\Api\V1\UserController::class);
+    Route::get('/user', App\Http\Controllers\Api\V1\UserController::class)->name('user.profile');
 
     // Hotel management routes
     Route::apiResource('hotels', App\Http\Controllers\Api\V1\HotelController::class);

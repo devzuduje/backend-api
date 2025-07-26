@@ -12,14 +12,12 @@ class LogoutTest extends TestCase
 {
     use RefreshDatabase;
 
-    private string $logoutEndpoint = '/api/v1/auth/logout';
-
     public function test_authenticated_user_can_logout(): void
     {
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->postJson($this->logoutEndpoint);
+        $response = $this->postJson(route('auth.logout'));
 
         $response->assertStatus(200)
             ->assertJson([
@@ -29,7 +27,7 @@ class LogoutTest extends TestCase
 
     public function test_user_cannot_logout_without_token(): void
     {
-        $response = $this->postJson($this->logoutEndpoint);
+        $response = $this->postJson(route('auth.logout'));
 
         $response->assertStatus(401)
             ->assertJson([
@@ -41,7 +39,7 @@ class LogoutTest extends TestCase
     {
         $response = $this->withHeaders([
             'Authorization' => 'Bearer invalid-token',
-        ])->postJson($this->logoutEndpoint);
+        ])->postJson(route('auth.logout'));
 
         $response->assertStatus(401)
             ->assertJson([
@@ -53,7 +51,7 @@ class LogoutTest extends TestCase
     {
         $response = $this->withHeaders([
             'Authorization' => 'InvalidFormat',
-        ])->postJson($this->logoutEndpoint);
+        ])->postJson(route('auth.logout'));
 
         $response->assertStatus(401)
             ->assertJson([
@@ -69,7 +67,7 @@ class LogoutTest extends TestCase
             'password' => Hash::make('password123'),
         ]);
 
-        $loginResponse = $this->postJson('/api/v1/auth/login', [
+        $loginResponse = $this->postJson(route('auth.login'), [
             'email' => 'test@example.com',
             'password' => 'password123',
         ]);
@@ -79,12 +77,12 @@ class LogoutTest extends TestCase
         // Verify token works before logout
         $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v1/user')->assertStatus(200);
+        ])->getJson(route('user.profile'))->assertStatus(200);
 
         // Logout should succeed
         $logoutResponse = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->postJson($this->logoutEndpoint);
+        ])->postJson(route('auth.logout'));
 
         $logoutResponse->assertStatus(200)
             ->assertJson([
@@ -105,8 +103,8 @@ class LogoutTest extends TestCase
             'password' => 'password123',
         ];
 
-        $login1 = $this->postJson('/api/v1/auth/login', $loginData);
-        $login2 = $this->postJson('/api/v1/auth/login', $loginData);
+        $login1 = $this->postJson(route('auth.login'), $loginData);
+        $login2 = $this->postJson(route('auth.login'), $loginData);
 
         $token1 = $login1->json('token');
         $token2 = $login2->json('token');
@@ -122,7 +120,7 @@ class LogoutTest extends TestCase
 
         // Logout with first token should succeed
         $this->withHeaders(['Authorization' => 'Bearer ' . $token1])
-            ->postJson($this->logoutEndpoint)->assertStatus(200);
+            ->postJson(route('auth.logout'))->assertStatus(200);
 
         // Second token should still work for accessing protected routes
         $this->withHeaders(['Authorization' => 'Bearer ' . $token2])
@@ -137,7 +135,7 @@ class LogoutTest extends TestCase
             'password' => Hash::make('password123'),
         ]);
 
-        $loginResponse = $this->postJson('/api/v1/auth/login', [
+        $loginResponse = $this->postJson(route('auth.login'), [
             'email' => 'test@example.com',
             'password' => 'password123',
         ]);
@@ -147,7 +145,7 @@ class LogoutTest extends TestCase
         // Logout should succeed with valid token
         $firstResponse = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->postJson($this->logoutEndpoint);
+        ])->postJson(route('auth.logout'));
 
         $firstResponse->assertStatus(200)
             ->assertJson([
@@ -160,7 +158,7 @@ class LogoutTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->postJson($this->logoutEndpoint);
+        $response = $this->postJson(route('auth.logout'));
 
         $response->assertStatus(200)
             ->assertJson([

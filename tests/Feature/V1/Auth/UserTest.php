@@ -11,8 +11,6 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    private string $userEndpoint = '/api/v1/user';
-
     public function test_authenticated_user_can_get_profile(): void
     {
         $user = User::factory()->create([
@@ -22,7 +20,7 @@ class UserTest extends TestCase
 
         Sanctum::actingAs($user);
 
-        $response = $this->getJson($this->userEndpoint);
+        $response = $this->getJson(route('user.profile'));
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -46,7 +44,7 @@ class UserTest extends TestCase
 
     public function test_unauthenticated_user_cannot_get_profile(): void
     {
-        $response = $this->getJson($this->userEndpoint);
+        $response = $this->getJson(route('user.profile'));
 
         $response->assertStatus(401)
             ->assertJson([
@@ -59,7 +57,7 @@ class UserTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->getJson($this->userEndpoint);
+        $response = $this->getJson(route('user.profile'));
 
         $response->assertStatus(200)
             ->assertJsonMissing(['password']);
@@ -75,7 +73,7 @@ class UserTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->getJson($this->userEndpoint);
+        ])->getJson(route('user.profile'));
 
         $response->assertStatus(200)
             ->assertJson([
@@ -91,7 +89,7 @@ class UserTest extends TestCase
     {
         $response = $this->withHeaders([
             'Authorization' => 'Bearer invalid-token',
-        ])->getJson($this->userEndpoint);
+        ])->getJson(route('user.profile'));
 
         $response->assertStatus(401)
             ->assertJson([
@@ -106,7 +104,7 @@ class UserTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'InvalidFormat ' . $token,
-        ])->getJson($this->userEndpoint);
+        ])->getJson(route('user.profile'));
 
         $response->assertStatus(401)
             ->assertJson([
