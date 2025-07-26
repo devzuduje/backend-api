@@ -36,14 +36,14 @@ class Accommodation extends Base\Accommodation
     public function hotels()
     {
         return $this->belongsToMany(Hotel::class, 'hotel_rooms')
-                    ->withPivot('room_type_id', 'quantity')
-                    ->withTimestamps();
+            ->withPivot('room_type_id', 'quantity')
+            ->withTimestamps();
     }
 
     public function roomTypes()
     {
         return $this->belongsToMany(RoomType::class, 'hotel_rooms')
-                    ->withPivot('hotel_id', 'quantity')
-                    ->withTimestamps();
+            ->withPivot('hotel_id', 'quantity')
+            ->withTimestamps();
     }
 }

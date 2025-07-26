@@ -29,6 +29,6 @@ final class HotelRoomBuilder extends Builder
     public function byHotelAndType(int $hotelId, int $roomTypeId): self
     {
         return $this->where(column: 'hotel_id', operator: '=', value: $hotelId)
-                   ->where(column: 'room_type_id', operator: '=', value: $roomTypeId);
+            ->where(column: 'room_type_id', operator: '=', value: $roomTypeId);
     }
 }

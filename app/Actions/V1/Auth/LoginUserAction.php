@@ -12,7 +12,8 @@ class LoginUserAction
     {
         $email = data_get($credentials, 'email');
         $password = data_get($credentials, 'password');
-        
+
+        /** @var User|null $user */
         $user = User::byEmail($email)->first();
 
         if (! $user || ! Hash::check($password, $user->password)) {

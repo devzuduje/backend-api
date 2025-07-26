@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\RoomType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RoomTypeSeeder extends Seeder
@@ -29,10 +27,7 @@ class RoomTypeSeeder extends Seeder
         ];
 
         foreach ($roomTypes as $roomType) {
-            RoomType::firstOrCreate(
-                ['code' => $roomType['code']], 
-                $roomType
-            );
+            \App\Models\RoomType::query()->firstOrCreate(['code' => $roomType['code']], $roomType);
         }
     }
 }

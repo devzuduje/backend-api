@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Accommodation;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AccommodationSeeder extends Seeder
@@ -37,10 +35,7 @@ class AccommodationSeeder extends Seeder
         ];
 
         foreach ($accommodations as $accommodation) {
-            Accommodation::firstOrCreate(
-                ['code' => $accommodation['code']], 
-                $accommodation
-            );
+            \App\Models\Accommodation::query()->firstOrCreate(['code' => $accommodation['code']], $accommodation);
         }
     }
 }

@@ -13,11 +13,11 @@ final class UserBuilder extends Builder
 
     public function active(): self
     {
-        return $this->whereNotNull(column: 'email_verified_at');
+        return $this->whereNotNull('email_verified_at');
     }
 
     public function inactive(): self
     {
-        return $this->whereNull(column: 'email_verified_at');
+        return $this->whereNull('email_verified_at');
     }
 }
