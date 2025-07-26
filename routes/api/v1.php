@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Hotel management routes
     Route::apiResource('hotels', App\Http\Controllers\Api\V1\HotelController::class);
+    Route::post('hotels/{hotelId}/restore', [App\Http\Controllers\Api\V1\HotelController::class, 'restore']);
 
     // Room Type management routes
     Route::apiResource('room-types', App\Http\Controllers\Api\V1\RoomTypeController::class);

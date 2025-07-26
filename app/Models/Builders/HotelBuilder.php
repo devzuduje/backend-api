@@ -20,4 +20,15 @@ final class HotelBuilder extends Builder
     {
         return $this->where(column: 'max_rooms', operator: '>=', value: $minRooms);
     }
+
+    public function withTrashed(): self
+    {
+        return $this->withoutGlobalScope(\Illuminate\Database\Eloquent\SoftDeletingScope::class);
+    }
+
+    public function onlyTrashed(): self
+    {
+        return $this->withoutGlobalScope(\Illuminate\Database\Eloquent\SoftDeletingScope::class)
+            ->whereNotNull('deleted_at');
+    }
 }

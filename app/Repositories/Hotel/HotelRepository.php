@@ -118,6 +118,29 @@ final class HotelRepository implements HotelRepositoryInterface
             ->get();
     }
 
+    public function restore(int $hotelId): Hotel
+    {
+        /** @var Hotel $hotel */
+        $hotel = Hotel::withTrashed()->findOrFail($hotelId);
+
+        $hotel->restore();
+
+        return $hotel->fresh();
+    }
+
+    public function forceDelete(int $hotelId): bool
+    {
+        /** @var Hotel $hotel */
+        $hotel = Hotel::withTrashed()->findOrFail($hotelId);
+
+        return $hotel->forceDelete();
+    }
+
+    public function getTrashed(): Collection
+    {
+        return Hotel::onlyTrashed()->get();
+    }
+
     private function applyFilters(Builder $query, array $filters): void
     {
         if (data_get($filters, 'city')) {
@@ -136,6 +159,14 @@ final class HotelRepository implements HotelRepositoryInterface
                     ->orWhere('nit', 'LIKE', "%{$search}%")
                     ->orWhere('address', 'LIKE', "%{$search}%");
             });
+        }
+
+        if (data_get($filters, 'with_trashed')) {
+            /** @var \App\Models\Builders\HotelBuilder $query */
+            $query->withTrashed();
+        } elseif (data_get($filters, 'only_trashed')) {
+            /** @var \App\Models\Builders\HotelBuilder $query */
+            $query->onlyTrashed();
         }
 
         $query->orderBy('name');

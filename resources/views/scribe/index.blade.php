@@ -116,6 +116,9 @@
                                                                             <li class="tocify-item level-3" data-unique="gestion-de-hoteles-DELETEapi-v1-hotels--id-">
                                             <a href="#gestion-de-hoteles-DELETEapi-v1-hotels--id-">Eliminar hotel</a>
                                         </li>
+                                                                            <li class="tocify-item level-3" data-unique="gestion-de-hoteles-POSTapi-v1-hotels--hotelId--restore">
+                                            <a href="#gestion-de-hoteles-POSTapi-v1-hotels--hotelId--restore">Restaurar hotel</a>
+                                        </li>
                                                                     </ul>
                                                                         </ul>
                             </ul>
@@ -651,7 +654,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/hotels?city=Bogot%C3%A1&amp;min_rooms=50&amp;search=Plaza&amp;page=1&amp;per_page=15" \
+    --get "http://localhost/api/v1/hotels?city=Bogot%C3%A1&amp;min_rooms=50&amp;search=Plaza&amp;page=1&amp;per_page=15&amp;with_trashed=&amp;only_trashed=" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -668,6 +671,8 @@ const params = {
     "search": "Plaza",
     "page": "1",
     "per_page": "15",
+    "with_trashed": "0",
+    "only_trashed": "0",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -838,6 +843,48 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="query">
     <br>
 <p>Elementos por página (máximo 100). Must be at least 1. Must not be greater than 100. Example: <code>15</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>with_trashed</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="GETapi-v1-hotels" style="display: none">
+            <input type="radio" name="with_trashed"
+                   value="1"
+                   data-endpoint="GETapi-v1-hotels"
+                   data-component="query"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="GETapi-v1-hotels" style="display: none">
+            <input type="radio" name="with_trashed"
+                   value="0"
+                   data-endpoint="GETapi-v1-hotels"
+                   data-component="query"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Incluir hoteles eliminados (borrado lógico). Example: <code>false</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>only_trashed</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="GETapi-v1-hotels" style="display: none">
+            <input type="radio" name="only_trashed"
+                   value="1"
+                   data-endpoint="GETapi-v1-hotels"
+                   data-component="query"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="GETapi-v1-hotels" style="display: none">
+            <input type="radio" name="only_trashed"
+                   value="0"
+                   data-endpoint="GETapi-v1-hotels"
+                   data-component="query"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Mostrar solo hoteles eliminados. Example: <code>false</code></p>
             </div>
                 </form>
 
@@ -1050,7 +1097,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/hotels/1" \
+    --get "http://localhost/api/v1/hotels/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1058,7 +1105,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/hotels/1"
+    "http://localhost/api/v1/hotels/16"
 );
 
 const headers = {
@@ -1179,10 +1226,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-hotels--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the hotel. Example: <code>1</code></p>
+<p>The ID of the hotel. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -1200,7 +1247,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/hotels/1" \
+    "http://localhost/api/v1/hotels/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -1216,7 +1263,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/hotels/1"
+    "http://localhost/api/v1/hotels/16"
 );
 
 const headers = {
@@ -1334,10 +1381,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-hotels--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the hotel. Example: <code>1</code></p>
+<p>The ID of the hotel. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1403,7 +1450,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-<p>Elimina un hotel del sistema. Esta operación no se puede deshacer.</p>
+<p>Elimina un hotel del sistema usando borrado lógico. El hotel puede ser restaurado posteriormente.</p>
 
 <span id="example-requests-DELETEapi-v1-hotels--id-">
 <blockquote>Example request:</blockquote>
@@ -1411,7 +1458,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/hotels/1" \
+    "http://localhost/api/v1/hotels/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1419,7 +1466,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/hotels/1"
+    "http://localhost/api/v1/hotels/16"
 );
 
 const headers = {
@@ -1524,10 +1571,144 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-v1-hotels--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the hotel. Example: <code>1</code></p>
+<p>The ID of the hotel. Example: <code>16</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="gestion-de-hoteles-POSTapi-v1-hotels--hotelId--restore">Restaurar hotel</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Restaura un hotel previamente eliminado (borrado lógico).</p>
+
+<span id="example-requests-POSTapi-v1-hotels--hotelId--restore">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/hotels/16/restore" \
+    --header "Authorization: Bearer {YOUR_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/hotels/16/restore"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-hotels--hotelId--restore">
+</span>
+<span id="execution-results-POSTapi-v1-hotels--hotelId--restore" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-hotels--hotelId--restore"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-hotels--hotelId--restore"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-hotels--hotelId--restore" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-hotels--hotelId--restore">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-hotels--hotelId--restore" data-method="POST"
+      data-path="api/v1/hotels/{hotelId}/restore"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-hotels--hotelId--restore', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-hotels--hotelId--restore"
+                    onclick="tryItOut('POSTapi-v1-hotels--hotelId--restore');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-hotels--hotelId--restore"
+                    onclick="cancelTryOut('POSTapi-v1-hotels--hotelId--restore');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-hotels--hotelId--restore"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/hotels/{hotelId}/restore</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-hotels--hotelId--restore"
+               value="Bearer {YOUR_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-hotels--hotelId--restore"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-hotels--hotelId--restore"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>hotelId</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="hotelId"                data-endpoint="POSTapi-v1-hotels--hotelId--restore"
+               value="16"
+               data-component="url">
+    <br>
+<p>Example: <code>16</code></p>
             </div>
                     </form>
 

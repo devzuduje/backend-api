@@ -19,6 +19,8 @@ class IndexHotelRequest extends FormRequest
             'search' => ['sometimes', 'string', 'max:255'],
             'page' => ['sometimes', 'integer', 'min:1'],
             'per_page' => ['sometimes', 'integer', 'min:1', 'max:100'],
+            'with_trashed' => ['sometimes', 'boolean'],
+            'only_trashed' => ['sometimes', 'boolean'],
         ];
     }
 
@@ -34,6 +36,8 @@ class IndexHotelRequest extends FormRequest
             'per_page.integer' => 'El número de elementos por página debe ser un entero.',
             'per_page.min' => 'Debe mostrar al menos 1 elemento por página.',
             'per_page.max' => 'No se pueden mostrar más de 100 elementos por página.',
+            'with_trashed.boolean' => 'El parámetro with_trashed debe ser verdadero o falso.',
+            'only_trashed.boolean' => 'El parámetro only_trashed debe ser verdadero o falso.',
         ];
     }
 
@@ -59,6 +63,14 @@ class IndexHotelRequest extends FormRequest
             'per_page' => [
                 'description' => 'Elementos por página (máximo 100)',
                 'example' => 15,
+            ],
+            'with_trashed' => [
+                'description' => 'Incluir hoteles eliminados (borrado lógico)',
+                'example' => false,
+            ],
+            'only_trashed' => [
+                'description' => 'Mostrar solo hoteles eliminados',
+                'example' => false,
             ],
         ];
     }

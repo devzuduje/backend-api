@@ -71,12 +71,34 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      with_trashed:
+        name: with_trashed
+        description: 'Incluir hoteles eliminados (borrado lógico).'
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      only_trashed:
+        name: only_trashed
+        description: 'Mostrar solo hoteles eliminados.'
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanQueryParameters:
       city: Bogotá
       min_rooms: 50
       search: Plaza
       page: 1
       per_page: 15
+      with_trashed: false
+      only_trashed: false
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -210,14 +232,14 @@ endpoints:
         name: id
         description: 'The ID of the hotel.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -265,14 +287,14 @@ endpoints:
         name: id
         description: 'The ID of the hotel.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -353,7 +375,7 @@ endpoints:
       subgroup: 'CRUD de Hoteles'
       subgroupDescription: ''
       title: 'Eliminar hotel'
-      description: 'Elimina un hotel del sistema. Esta operación no se puede deshacer.'
+      description: 'Elimina un hotel del sistema usando borrado lógico. El hotel puede ser restaurado posteriormente.'
       authenticated: true
       custom: []
     headers:
@@ -365,14 +387,59 @@ endpoints:
         name: id
         description: 'The ID of the hotel.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/hotels/{hotelId}/restore'
+    metadata:
+      groupName: 'Gestión de Hoteles'
+      groupDescription: ''
+      subgroup: 'CRUD de Hoteles'
+      subgroupDescription: ''
+      title: 'Restaurar hotel'
+      description: 'Restaura un hotel previamente eliminado (borrado lógico).'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      hotelId:
+        name: hotelId
+        description: ''
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      hotelId: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

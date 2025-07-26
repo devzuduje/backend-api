@@ -31,4 +31,10 @@ interface HotelRepositoryInterface
     public function getTopHotelsByRooms(int $limit = 10): Collection;
 
     public function getHotelsByRoomsRange(int $minRooms, int $maxRooms): Collection;
+
+    public function restore(int $hotelId): Hotel;
+
+    public function forceDelete(int $hotelId): bool;
+
+    public function getTrashed(): Collection;
 }

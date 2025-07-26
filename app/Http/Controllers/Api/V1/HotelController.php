@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Actions\V1\Hotel\CreateHotelAction;
 use App\Actions\V1\Hotel\DeleteHotelAction;
 use App\Actions\V1\Hotel\GetHotelsAction;
+use App\Actions\V1\Hotel\RestoreHotelAction;
 use App\Actions\V1\Hotel\UpdateHotelAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Hotel\IndexHotelRequest;
@@ -89,7 +90,7 @@ class HotelController extends Controller
 
     #[Endpoint(
         title: 'Eliminar hotel',
-        description: 'Elimina un hotel del sistema. Esta operación no se puede deshacer.'
+        description: 'Elimina un hotel del sistema usando borrado lógico. El hotel puede ser restaurado posteriormente.'
     )]
     #[Authenticated]
     public function destroy(Hotel $hotel, DeleteHotelAction $action): JsonResponse
@@ -99,6 +100,22 @@ class HotelController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Hotel eliminado exitosamente.',
+        ]);
+    }
+
+    #[Endpoint(
+        title: 'Restaurar hotel',
+        description: 'Restaura un hotel previamente eliminado (borrado lógico).'
+    )]
+    #[Authenticated]
+    public function restore(int $hotelId, RestoreHotelAction $action): JsonResponse
+    {
+        $hotel = $action($hotelId);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Hotel restaurado exitosamente.',
+            'data' => $hotel,
         ]);
     }
 }

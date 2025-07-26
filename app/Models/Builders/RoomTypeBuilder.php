@@ -24,6 +24,6 @@ final class RoomTypeBuilder extends Builder
     public function onlyTrashed(): self
     {
         return $this->withoutGlobalScope(\Illuminate\Database\Eloquent\SoftDeletingScope::class)
-                   ->whereNotNull('deleted_at');
+            ->whereNotNull('deleted_at');
     }
 }
