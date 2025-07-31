@@ -3,6 +3,7 @@
 namespace App\Actions\V1\Auth;
 
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class LogoutUserAction
 {

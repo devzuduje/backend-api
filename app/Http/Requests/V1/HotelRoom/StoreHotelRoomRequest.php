@@ -35,7 +35,9 @@ class StoreHotelRoomRequest extends FormRequest
             $hotelId = $this->input('hotel_id');
             $roomTypeId = $this->input('room_type_id');
             $accommodationId = $this->input('accommodation_id');
+            $newQuantity = $this->input('quantity');
 
+            // Validar combinación única
             if ($hotelId && $roomTypeId && $accommodationId) {
                 $exists = \App\Models\HotelRoom::query()->where('hotel_id', $hotelId)
                     ->where('room_type_id', $roomTypeId)
@@ -45,6 +47,28 @@ class StoreHotelRoomRequest extends FormRequest
 
                 if ($exists) {
                     $validator->errors()->add('combination', 'Ya existe una habitación con esta combinación de hotel, tipo de habitación y acomodación.');
+                }
+            }
+
+            // Validar que no se exceda el máximo de habitaciones del hotel
+            if ($hotelId && $newQuantity) {
+                $hotel = \App\Models\Hotel::find($hotelId);
+                if ($hotel) {
+                    // Obtener total de habitaciones ya registradas para este hotel
+                    $currentTotal = \App\Models\HotelRoom::where('hotel_id', $hotelId)
+                                                        ->whereNull('deleted_at')
+                                                        ->sum('quantity');
+                    
+                    $newTotal = $currentTotal + $newQuantity;
+                    
+                    if ($newTotal > $hotel->max_rooms) {
+                        $available = $hotel->max_rooms - $currentTotal;
+                        $validator->errors()->add('quantity', 
+                            "No se pueden agregar {$newQuantity} habitaciones. " .
+                            "El hotel permite máximo {$hotel->max_rooms} habitaciones. " .
+                            "Ya hay {$currentTotal} registradas. Disponibles: {$available}."
+                        );
+                    }
                 }
             }
         });

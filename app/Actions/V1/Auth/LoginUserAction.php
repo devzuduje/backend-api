@@ -3,8 +3,8 @@
 namespace App\Actions\V1\Auth;
 
 use App\Models\User;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class LoginUserAction
 {
@@ -17,9 +17,11 @@ class LoginUserAction
         $user = User::byEmail($email)->first();
 
         if (! $user || ! Hash::check($password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Las credenciales proporcionadas son incorrectas.'],
-            ]);
+            throw new HttpResponseException(
+                response()->json([
+                    'message' => 'Las credenciales proporcionadas son incorrectas.',
+                ], 401)
+            );
         }
 
         $token = $user->createToken('api-token')->plainTextToken;

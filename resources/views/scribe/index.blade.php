@@ -236,7 +236,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: July 26, 2025</li>
+        <li>Last updated: July 27, 2025</li>
     </ul>
 </div>
 
@@ -767,7 +767,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -1127,7 +1127,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/accommodations/1" \
+    --get "http://localhost/api/v1/accommodations/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1135,7 +1135,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/accommodations/1"
+    "http://localhost/api/v1/accommodations/16"
 );
 
 const headers = {
@@ -1161,7 +1161,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -1256,10 +1256,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-accommodations--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the accommodation. Example: <code>1</code></p>
+<p>The ID of the accommodation. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -1277,7 +1277,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/accommodations/1" \
+    "http://localhost/api/v1/accommodations/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -1291,7 +1291,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/accommodations/1"
+    "http://localhost/api/v1/accommodations/16"
 );
 
 const headers = {
@@ -1407,10 +1407,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-accommodations--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the accommodation. Example: <code>1</code></p>
+<p>The ID of the accommodation. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1462,7 +1462,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/accommodations/1" \
+    "http://localhost/api/v1/accommodations/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1470,7 +1470,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/accommodations/1"
+    "http://localhost/api/v1/accommodations/16"
 );
 
 const headers = {
@@ -1575,10 +1575,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-v1-accommodations--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the accommodation. Example: <code>1</code></p>
+<p>The ID of the accommodation. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -1596,7 +1596,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/accommodations/1/restore" \
+    "http://localhost/api/v1/accommodations/16/restore" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1604,7 +1604,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/accommodations/1/restore"
+    "http://localhost/api/v1/accommodations/16/restore"
 );
 
 const headers = {
@@ -1709,10 +1709,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="accommodationId"                data-endpoint="POSTapi-v1-accommodations--accommodationId--restore"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>Example: <code>1</code></p>
+<p>Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -1792,7 +1792,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -2232,7 +2232,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -2826,7 +2826,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -3037,6 +3037,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"address\": \"Calle 10 # 15-20, Centro Histórico\",
     \"city\": \"Bogotá\",
     \"nit\": \"900123456-1\",
+    \"email\": \"contacto@hotelplazamayor.com\",
+    \"phone\": \"+57 1 234 5678\",
     \"max_rooms\": 150
 }"
 </code></pre></div>
@@ -3058,6 +3060,8 @@ let body = {
     "address": "Calle 10 # 15-20, Centro Histórico",
     "city": "Bogotá",
     "nit": "900123456-1",
+    "email": "contacto@hotelplazamayor.com",
+    "phone": "+57 1 234 5678",
     "max_rooms": 150
 };
 
@@ -3197,6 +3201,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Número de identificación tributaria del hotel. Must not be greater than 20 characters. Example: <code>900123456-1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-hotels"
+               value="contacto@hotelplazamayor.com"
+               data-component="body">
+    <br>
+<p>Email de contacto del hotel. Must be a valid email address. Must not be greater than 255 characters. Example: <code>contacto@hotelplazamayor.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-hotels"
+               value="+57 1 234 5678"
+               data-component="body">
+    <br>
+<p>Teléfono de contacto del hotel. Must not be greater than 20 characters. Example: <code>+57 1 234 5678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>max_rooms</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
  &nbsp;
@@ -3257,7 +3283,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -3382,6 +3408,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"address\": \"Calle 10 # 15-25, Centro Histórico\",
     \"city\": \"Medellín\",
     \"nit\": \"900123456-2\",
+    \"email\": \"nuevo@hotelplazamayor.com\",
+    \"phone\": \"+57 4 567 8900\",
     \"max_rooms\": 200
 }"
 </code></pre></div>
@@ -3403,6 +3431,8 @@ let body = {
     "address": "Calle 10 # 15-25, Centro Histórico",
     "city": "Medellín",
     "nit": "900123456-2",
+    "email": "nuevo@hotelplazamayor.com",
+    "phone": "+57 4 567 8900",
     "max_rooms": 200
 };
 
@@ -3556,6 +3586,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Número de identificación tributaria del hotel (opcional). Must not be greater than 20 characters. Example: <code>900123456-2</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="PUTapi-v1-hotels--id-"
+               value="nuevo@hotelplazamayor.com"
+               data-component="body">
+    <br>
+<p>Email de contacto del hotel (opcional). Must be a valid email address. Must not be greater than 255 characters. Example: <code>nuevo@hotelplazamayor.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="PUTapi-v1-hotels--id-"
+               value="+57 4 567 8900"
+               data-component="body">
+    <br>
+<p>Teléfono de contacto del hotel (opcional). Must not be greater than 20 characters. Example: <code>+57 4 567 8900</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>max_rooms</code></b>&nbsp;&nbsp;
@@ -3901,7 +3953,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -4237,7 +4289,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/room-types/1" \
+    --get "http://localhost/api/v1/room-types/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4245,7 +4297,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/room-types/1"
+    "http://localhost/api/v1/room-types/16"
 );
 
 const headers = {
@@ -4271,7 +4323,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -4366,10 +4418,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-room-types--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the room type. Example: <code>1</code></p>
+<p>The ID of the room type. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -4387,7 +4439,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/room-types/1" \
+    "http://localhost/api/v1/room-types/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4400,7 +4452,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/room-types/1"
+    "http://localhost/api/v1/room-types/16"
 );
 
 const headers = {
@@ -4515,10 +4567,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-room-types--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the room type. Example: <code>1</code></p>
+<p>The ID of the room type. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -4559,7 +4611,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/room-types/1" \
+    "http://localhost/api/v1/room-types/16" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4567,7 +4619,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/room-types/1"
+    "http://localhost/api/v1/room-types/16"
 );
 
 const headers = {
@@ -4672,10 +4724,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-v1-room-types--id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the room type. Example: <code>1</code></p>
+<p>The ID of the room type. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -4693,7 +4745,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/room-types/1/restore" \
+    "http://localhost/api/v1/room-types/16/restore" \
     --header "Authorization: Bearer {YOUR_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4701,7 +4753,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/room-types/1/restore"
+    "http://localhost/api/v1/room-types/16/restore"
 );
 
 const headers = {
@@ -4806,10 +4858,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="roomTypeId"                data-endpoint="POSTapi-v1-room-types--roomTypeId--restore"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>Example: <code>1</code></p>
+<p>Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -4866,7 +4918,7 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
-access-control-allow-origin: *
+vary: Origin
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{

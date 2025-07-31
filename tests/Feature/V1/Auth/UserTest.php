@@ -20,7 +20,7 @@ class UserTest extends TestCase
 
         Sanctum::actingAs($user);
 
-        $response = $this->getJson(route('user.profile'));
+        $response = $this->getJson(route('api.v1.user.profile'));
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -44,7 +44,7 @@ class UserTest extends TestCase
 
     public function test_unauthenticated_user_cannot_get_profile(): void
     {
-        $response = $this->getJson(route('user.profile'));
+        $response = $this->getJson(route('api.v1.user.profile'));
 
         $response->assertStatus(401)
             ->assertJson([
@@ -57,7 +57,7 @@ class UserTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->getJson(route('user.profile'));
+        $response = $this->getJson(route('api.v1.user.profile'));
 
         $response->assertStatus(200)
             ->assertJsonMissing(['password']);
@@ -73,7 +73,7 @@ class UserTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->getJson(route('user.profile'));
+        ])->getJson(route('api.v1.user.profile'));
 
         $response->assertStatus(200)
             ->assertJson([
@@ -89,7 +89,7 @@ class UserTest extends TestCase
     {
         $response = $this->withHeaders([
             'Authorization' => 'Bearer invalid-token',
-        ])->getJson(route('user.profile'));
+        ])->getJson(route('api.v1.user.profile'));
 
         $response->assertStatus(401)
             ->assertJson([
@@ -104,7 +104,7 @@ class UserTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'InvalidFormat ' . $token,
-        ])->getJson(route('user.profile'));
+        ])->getJson(route('api.v1.user.profile'));
 
         $response->assertStatus(401)
             ->assertJson([

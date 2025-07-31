@@ -13,13 +13,18 @@ return new class extends Migration
     {
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('address');
             $table->string('city');
             $table->string('nit')->unique();
+            $table->string('email')->unique();
+            $table->string('phone');
             $table->integer('max_rooms');
             $table->timestamps();
             $table->softDeletes();
+            
+            // Restricción única compuesta: mismo nombre solo si está en diferente ciudad
+            $table->unique(['name', 'city'], 'hotels_name_city_unique');
         });
     }
 

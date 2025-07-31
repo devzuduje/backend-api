@@ -20,7 +20,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.register'), $userData);
+        $response = $this->postJson(route('api.v1.auth.register'), $userData);
 
         $response->assertStatus(201)
             ->assertJsonStructure([
@@ -67,7 +67,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.register'), $userData);
+        $response = $this->postJson(route('api.v1.auth.register'), $userData);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['email']);
@@ -82,7 +82,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => '123',
         ];
 
-        $response = $this->postJson(route('auth.register'), $userData);
+        $response = $this->postJson(route('api.v1.auth.register'), $userData);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['password']);
@@ -97,7 +97,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'different_password',
         ];
 
-        $response = $this->postJson(route('auth.register'), $userData);
+        $response = $this->postJson(route('api.v1.auth.register'), $userData);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['password']);
@@ -105,7 +105,7 @@ class RegisterTest extends TestCase
 
     public function test_user_cannot_register_without_required_fields(): void
     {
-        $response = $this->postJson(route('auth.register'), []);
+        $response = $this->postJson(route('api.v1.auth.register'), []);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name', 'email', 'password', 'password_confirmation']);
@@ -120,7 +120,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.register'), $userData);
+        $response = $this->postJson(route('api.v1.auth.register'), $userData);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name']);
@@ -137,7 +137,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.register'), $userData);
+        $response = $this->postJson(route('api.v1.auth.register'), $userData);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['email']);
@@ -152,7 +152,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.register'), $userData);
+        $response = $this->postJson(route('api.v1.auth.register'), $userData);
 
         $response->assertStatus(201)
             ->assertJsonMissing(['password']);

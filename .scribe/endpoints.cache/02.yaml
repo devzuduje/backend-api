@@ -111,7 +111,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
         custom: []
     responseFields: []
@@ -185,6 +185,26 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      email:
+        name: email
+        description: 'Email de contacto del hotel. Must be a valid email address. Must not be greater than 255 characters.'
+        required: true
+        example: contacto@hotelplazamayor.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone:
+        name: phone
+        description: 'Teléfono de contacto del hotel. Must not be greater than 20 characters.'
+        required: true
+        example: '+57 1 234 5678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       max_rooms:
         name: max_rooms
         description: 'Número máximo de habitaciones del hotel. Must be at least 1. Must not be greater than 10000.'
@@ -200,6 +220,8 @@ endpoints:
       address: 'Calle 10 # 15-20, Centro Histórico'
       city: Bogotá
       nit: 900123456-1
+      email: contacto@hotelplazamayor.com
+      phone: '+57 1 234 5678'
       max_rooms: 150
     fileParameters: []
     responses: []
@@ -254,7 +276,7 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: '*'
+          vary: Origin
         description: null
         custom: []
     responseFields: []
@@ -340,6 +362,26 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      email:
+        name: email
+        description: 'Email de contacto del hotel (opcional). Must be a valid email address. Must not be greater than 255 characters.'
+        required: false
+        example: nuevo@hotelplazamayor.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone:
+        name: phone
+        description: 'Teléfono de contacto del hotel (opcional). Must not be greater than 20 characters.'
+        required: false
+        example: '+57 4 567 8900'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       max_rooms:
         name: max_rooms
         description: 'Número máximo de habitaciones del hotel (opcional). Must be at least 1. Must not be greater than 10000.'
@@ -355,6 +397,8 @@ endpoints:
       address: 'Calle 10 # 15-25, Centro Histórico'
       city: Medellín
       nit: 900123456-2
+      email: nuevo@hotelplazamayor.com
+      phone: '+57 4 567 8900'
       max_rooms: 200
     fileParameters: []
     responses: []

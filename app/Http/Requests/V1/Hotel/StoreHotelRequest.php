@@ -3,6 +3,7 @@
 namespace App\Http\Requests\V1\Hotel;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreHotelRequest extends FormRequest
 {
@@ -18,8 +19,28 @@ class StoreHotelRequest extends FormRequest
             'address' => ['required', 'string', 'max:500'],
             'city' => ['required', 'string', 'max:255'],
             'nit' => ['required', 'string', 'max:20', 'unique:hotels,nit'],
+            'email' => ['required', 'email', 'max:255', 'unique:hotels,email'],
+            'phone' => ['required', 'string', 'max:20'],
             'max_rooms' => ['required', 'integer', 'min:1', 'max:10000'],
         ];
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $name = $this->input('name');
+            $city = $this->input('city');
+            
+            if ($name && $city) {
+                $exists = \App\Models\Hotel::where('name', $name)
+                                         ->where('city', $city)
+                                         ->exists();
+                
+                if ($exists) {
+                    $validator->errors()->add('name', 'Ya existe un hotel con este nombre en la misma ciudad.');
+                }
+            }
+        });
     }
 
     public function messages(): array
@@ -27,6 +48,7 @@ class StoreHotelRequest extends FormRequest
         return [
             'name.required' => 'El nombre del hotel es obligatorio.',
             'name.max' => 'El nombre no puede exceder 255 caracteres.',
+            'name.unique' => 'Ya existe un hotel con este nombre en la misma ciudad.',
             'address.required' => 'La dirección es obligatoria.',
             'address.max' => 'La dirección no puede exceder 500 caracteres.',
             'city.required' => 'La ciudad es obligatoria.',
@@ -34,6 +56,12 @@ class StoreHotelRequest extends FormRequest
             'nit.required' => 'El NIT es obligatorio.',
             'nit.unique' => 'Ya existe un hotel con este NIT.',
             'nit.max' => 'El NIT no puede exceder 20 caracteres.',
+            'email.required' => 'El email es obligatorio.',
+            'email.email' => 'El email debe tener un formato válido.',
+            'email.unique' => 'Ya existe un hotel con este email.',
+            'email.max' => 'El email no puede exceder 255 caracteres.',
+            'phone.required' => 'El teléfono es obligatorio.',
+            'phone.max' => 'El teléfono no puede exceder 20 caracteres.',
             'max_rooms.required' => 'El número máximo de habitaciones es obligatorio.',
             'max_rooms.integer' => 'El número máximo de habitaciones debe ser un número entero.',
             'max_rooms.min' => 'El hotel debe tener al menos 1 habitación.',
@@ -59,6 +87,14 @@ class StoreHotelRequest extends FormRequest
             'nit' => [
                 'description' => 'Número de identificación tributaria del hotel',
                 'example' => '900123456-1',
+            ],
+            'email' => [
+                'description' => 'Email de contacto del hotel',
+                'example' => 'contacto@hotelplazamayor.com',
+            ],
+            'phone' => [
+                'description' => 'Teléfono de contacto del hotel',
+                'example' => '+57 1 234 5678',
             ],
             'max_rooms' => [
                 'description' => 'Número máximo de habitaciones del hotel',

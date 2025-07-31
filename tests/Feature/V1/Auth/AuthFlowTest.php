@@ -21,7 +21,7 @@ class AuthFlowTest extends TestCase
             'password_confirmation' => 'password123',
         ];
 
-        $registerResponse = $this->postJson(route('auth.register'), $registerData);
+        $registerResponse = $this->postJson(route('api.v1.auth.register'), $registerData);
 
         $registerResponse->assertStatus(201)
             ->assertJsonStructure([
@@ -35,7 +35,7 @@ class AuthFlowTest extends TestCase
         // 2. Verify the user can access protected routes with registration token
         $userResponse = $this->withHeaders([
             'Authorization' => 'Bearer ' . $registerToken,
-        ])->getJson(route('user.profile'));
+        ])->getJson(route('api.v1.user.profile'));
 
         $userResponse->assertStatus(200)
             ->assertJsonPath('user.email', 'juan.perez@example.com');
@@ -43,7 +43,7 @@ class AuthFlowTest extends TestCase
         // 3. Logout with registration token
         $logoutResponse = $this->withHeaders([
             'Authorization' => 'Bearer ' . $registerToken,
-        ])->postJson(route('auth.logout'));
+        ])->postJson(route('api.v1.auth.logout'));
 
         $logoutResponse->assertStatus(200);
 
@@ -53,7 +53,7 @@ class AuthFlowTest extends TestCase
             'password' => 'password123',
         ];
 
-        $loginResponse = $this->postJson(route('auth.login'), $loginData);
+        $loginResponse = $this->postJson(route('api.v1.auth.login'), $loginData);
 
         $loginResponse->assertStatus(200)
             ->assertJsonStructure([
@@ -67,7 +67,7 @@ class AuthFlowTest extends TestCase
         // 5. Verify the user can access protected routes with login token
         $userResponse2 = $this->withHeaders([
             'Authorization' => 'Bearer ' . $loginToken,
-        ])->getJson(route('user.profile'));
+        ])->getJson(route('api.v1.user.profile'));
 
         $userResponse2->assertStatus(200)
             ->assertJsonPath('user.email', 'juan.perez@example.com');
@@ -78,7 +78,7 @@ class AuthFlowTest extends TestCase
         // 7. Final logout
         $finalLogoutResponse = $this->withHeaders([
             'Authorization' => 'Bearer ' . $loginToken,
-        ])->postJson(route('auth.logout'));
+        ])->postJson(route('api.v1.auth.logout'));
 
         $finalLogoutResponse->assertStatus(200);
     }
@@ -95,15 +95,17 @@ class AuthFlowTest extends TestCase
             'password' => 'wrong_password',
         ];
 
-        $response = $this->postJson(route('auth.login'), $loginData);
+        $response = $this->postJson(route('api.v1.auth.login'), $loginData);
 
-        $response->assertStatus(422)
-            ->assertJsonValidationErrors(['email']);
+        $response->assertStatus(401)
+            ->assertJson([
+                'message' => 'Las credenciales proporcionadas son incorrectas.',
+            ]);
     }
 
     public function test_access_protected_route_without_token_fails(): void
     {
-        $response = $this->getJson(route('user.profile'));
+        $response = $this->getJson(route('api.v1.user.profile'));
 
         $response->assertStatus(401)
             ->assertJson(['message' => 'Unauthenticated.']);
@@ -120,7 +122,7 @@ class AuthFlowTest extends TestCase
             'password_confirmation' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.register'), $registerData);
+        $response = $this->postJson(route('api.v1.auth.register'), $registerData);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['email']);

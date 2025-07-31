@@ -18,6 +18,39 @@ class UpdateHotelRoomRequest extends FormRequest
         ];
     }
 
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $newQuantity = $this->input('quantity');
+            
+            if ($newQuantity) {
+                $hotelRoomId = $this->route('hotel_room'); // ID de la habitación que se está actualizando
+                $hotelRoom = \App\Models\HotelRoom::find($hotelRoomId);
+                
+                if ($hotelRoom) {
+                    $hotel = $hotelRoom->hotel;
+                    
+                    // Obtener total actual excluyendo la habitación que se está actualizando
+                    $currentTotal = \App\Models\HotelRoom::where('hotel_id', $hotel->id)
+                                                        ->where('id', '!=', $hotelRoomId)
+                                                        ->whereNull('deleted_at')
+                                                        ->sum('quantity');
+                    
+                    $newTotal = $currentTotal + $newQuantity;
+                    
+                    if ($newTotal > $hotel->max_rooms) {
+                        $available = $hotel->max_rooms - $currentTotal;
+                        $validator->errors()->add('quantity', 
+                            "No se puede actualizar a {$newQuantity} habitaciones. " .
+                            "El hotel permite máximo {$hotel->max_rooms} habitaciones. " .
+                            "Ya hay {$currentTotal} registradas (excluyendo esta). Disponibles: {$available}."
+                        );
+                    }
+                }
+            }
+        });
+    }
+
     public function messages(): array
     {
         return [

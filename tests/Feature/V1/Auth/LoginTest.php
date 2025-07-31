@@ -23,7 +23,7 @@ class LoginTest extends TestCase
             'password' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.login'), $loginData);
+        $response = $this->postJson(route('api.v1.auth.login'), $loginData);
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -54,7 +54,7 @@ class LoginTest extends TestCase
         $token = $response->json('token');
         $protectedResponse = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->getJson(route('user.profile'));
+        ])->getJson(route('api.v1.user.profile'));
 
         $protectedResponse->assertStatus(200);
     }
@@ -71,10 +71,9 @@ class LoginTest extends TestCase
             'password' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.login'), $loginData);
+        $response = $this->postJson(route('api.v1.auth.login'), $loginData);
 
-        $response->assertStatus(422)
-            ->assertJsonValidationErrors(['email'])
+        $response->assertStatus(401)
             ->assertJson([
                 'message' => 'Las credenciales proporcionadas son incorrectas.',
             ]);
@@ -92,10 +91,9 @@ class LoginTest extends TestCase
             'password' => 'wrong_password',
         ];
 
-        $response = $this->postJson(route('auth.login'), $loginData);
+        $response = $this->postJson(route('api.v1.auth.login'), $loginData);
 
-        $response->assertStatus(422)
-            ->assertJsonValidationErrors(['email'])
+        $response->assertStatus(401)
             ->assertJson([
                 'message' => 'Las credenciales proporcionadas son incorrectas.',
             ]);
@@ -108,7 +106,7 @@ class LoginTest extends TestCase
             'password' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.login'), $loginData);
+        $response = $this->postJson(route('api.v1.auth.login'), $loginData);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['email']);
@@ -120,7 +118,7 @@ class LoginTest extends TestCase
             'email' => 'test@example.com',
         ];
 
-        $response = $this->postJson(route('auth.login'), $loginData);
+        $response = $this->postJson(route('api.v1.auth.login'), $loginData);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['password']);
@@ -128,7 +126,7 @@ class LoginTest extends TestCase
 
     public function test_user_cannot_login_with_empty_credentials(): void
     {
-        $response = $this->postJson(route('auth.login'), []);
+        $response = $this->postJson(route('api.v1.auth.login'), []);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['email', 'password']);
@@ -146,7 +144,7 @@ class LoginTest extends TestCase
             'password' => 'password123',
         ];
 
-        $response = $this->postJson(route('auth.login'), $loginData);
+        $response = $this->postJson(route('api.v1.auth.login'), $loginData);
 
         $response->assertStatus(200)
             ->assertJsonMissing(['password']);
@@ -167,8 +165,8 @@ class LoginTest extends TestCase
             'password' => 'password123',
         ];
 
-        $firstResponse = $this->postJson(route('auth.login'), $loginData);
-        $secondResponse = $this->postJson(route('auth.login'), $loginData);
+        $firstResponse = $this->postJson(route('api.v1.auth.login'), $loginData);
+        $secondResponse = $this->postJson(route('api.v1.auth.login'), $loginData);
 
         $firstToken = $firstResponse->json('token');
         $secondToken = $secondResponse->json('token');
@@ -177,11 +175,11 @@ class LoginTest extends TestCase
 
         // Both tokens should be valid
         $this->withHeaders(['Authorization' => 'Bearer ' . $firstToken])
-            ->getJson('/api/v1/user')
+            ->getJson(route('api.v1.user.profile'))
             ->assertStatus(200);
 
         $this->withHeaders(['Authorization' => 'Bearer ' . $secondToken])
-            ->getJson('/api/v1/user')
+            ->getJson(route('api.v1.user.profile'))
             ->assertStatus(200);
     }
 }
