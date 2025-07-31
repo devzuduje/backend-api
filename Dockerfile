@@ -1,6 +1,6 @@
-FROM php:8.2-cli
+FROM php:8.2-apache
 
-# Instalar dependencias básicas
+# Instalar extensiones PHP necesarias
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     zip \
@@ -9,10 +9,19 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_pgsql \
     && rm -rf /var/lib/apt/lists/*
 
+# Habilitar mod_rewrite
+RUN a2enmod rewrite
+
+# Configurar Apache para Laravel
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /app
+# Configurar directorio de trabajo
+WORKDIR /var/www/html
 
 # Copiar archivos
 COPY . .
@@ -20,11 +29,9 @@ COPY . .
 # Instalar dependencias
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Permisos
-RUN chmod -R 775 storage bootstrap/cache
+# Configurar permisos
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Script de inicio que maneja el puerto correctamente
-RUN echo '#!/bin/bash\nset -e\necho "Starting Laravel..."\nPORT_NUM=$(echo ${PORT:-8000} | sed "s/[^0-9]*//g")\necho "Using port: $PORT_NUM"\nexec php artisan serve --host=0.0.0.0 --port=$PORT_NUM' > /app/start.sh && chmod +x /app/start.sh
-
-# Usar el script de inicio
-CMD ["/app/start.sh"]
+# Apache se ejecuta automáticamente en puerto 80
+EXPOSE 80
