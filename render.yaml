@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: tu-app-laravel
+    env: php
+    buildCommand: ./render-build.sh
+    startCommand: ./render-start.sh
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
